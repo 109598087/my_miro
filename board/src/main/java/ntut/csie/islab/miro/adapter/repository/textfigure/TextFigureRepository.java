@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TextFigureRepository {
+public class TextFigureRepository {  //todo: repository test
     private List<TextFigure> textFigures;
 
     public TextFigureRepository() {
