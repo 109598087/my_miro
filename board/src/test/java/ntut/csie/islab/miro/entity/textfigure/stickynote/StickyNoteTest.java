@@ -16,7 +16,7 @@ public class StickyNoteTest {
         UUID boardId = UUID.randomUUID();
         Position position = new Position(100, 100);
         String content = "stickyNote content";
-        Style style = new Style(20, ShapeKindEnum.RECTANGLE, 200, 200, "f9f900");
+        Style style = new Style(20, ShapeKindEnum.RECTANGLE, 200, 200, "#f9f900");
         TextFigure stickynote = new StickyNote(boardId, position, content, style);
 
         // getBoardIdTest
@@ -34,7 +34,7 @@ public class StickyNoteTest {
         UUID boardId = UUID.fromString("87b10f3a-7c1f-4ba8-b3a2-a61594772ff4");
         Position position = new Position(100, 100);
         String content = "stickyNote content";
-        Style style = new Style(20, ShapeKindEnum.RECTANGLE, 200, 200, "f9f900");
+        Style style = new Style(20, ShapeKindEnum.RECTANGLE, 200, 200, "#f9f900");
         TextFigure stickynote = new StickyNote(boardId, position, content, style);
 
         // boardIdTest
@@ -49,6 +49,6 @@ public class StickyNoteTest {
         assertEquals(ShapeKindEnum.RECTANGLE, stickynote.getStyle().getShape());
         assertEquals(200, stickynote.getStyle().getWidth());
         assertEquals(200, stickynote.getStyle().getHeight());
-        assertEquals("f9f900", stickynote.getStyle().getColor());
+        assertEquals("#f9f900", stickynote.getStyle().getColor());
     }
 }
