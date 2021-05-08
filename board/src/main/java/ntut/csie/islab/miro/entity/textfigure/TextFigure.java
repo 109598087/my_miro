@@ -49,4 +49,8 @@ public abstract class TextFigure extends AggregateRoot<UUID> {
     public void setStyle(Style style) {
         this.style = style;
     }
+
+    public UUID getFigureId() {
+        return this.getId();
+    }
 }
