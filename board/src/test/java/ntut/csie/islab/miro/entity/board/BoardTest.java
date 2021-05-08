@@ -22,6 +22,15 @@ public class BoardTest {
 
     @Test
     public void commit_a_sticknote() {
-//        Board board = createBoard();
+        // create board
+        UUID teamId = UUID.randomUUID();
+        String boardName = "boardName";
+        Board board = new Board(teamId, boardName);
+        // create fake figure (id)
+        UUID figureId = UUID.randomUUID();
+        // commit figure to its board
+        board.commitFigure(figureId);
+
+        assertEquals(1, board.getCommittedFigures().size());
     }
 }
