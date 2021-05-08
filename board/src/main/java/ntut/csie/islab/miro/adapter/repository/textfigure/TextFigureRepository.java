@@ -21,7 +21,7 @@ public class TextFigureRepository {
     public Optional<TextFigure> findById(UUID boardId, UUID textFigureId) {
         return textFigures.stream()
                 .filter(s -> boardId.equals(s.getBoardId()))
-                .filter(s -> textFigureId.equals(s.getFigureId()))
+                .filter(s -> textFigureId.equals(s.getTextFigureId()))
                 .findFirst();
     }
 }

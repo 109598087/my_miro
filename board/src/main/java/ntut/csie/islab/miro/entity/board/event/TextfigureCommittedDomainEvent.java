@@ -3,24 +3,23 @@ package ntut.csie.islab.miro.entity.board.event;
 import ntut.csie.sslab.ddd.model.DomainEvent;
 import ntut.csie.sslab.ddd.model.common.DateProvider;
 
-import java.util.Date;
 import java.util.UUID;
 
-public class FigureCommittedDomainEvent extends DomainEvent {
+public class TextfigureCommittedDomainEvent extends DomainEvent {
     private final UUID boardId;
-    private final UUID figureId;
+    private final UUID textFigureId;
 
-    public FigureCommittedDomainEvent(UUID boardId, UUID figureId) {
+    public TextfigureCommittedDomainEvent(UUID boardId, UUID textFigureId) {
         super(DateProvider.now());
         this.boardId = boardId;
-        this.figureId = figureId;
+        this.textFigureId = textFigureId;
     }
 
     public UUID getBoardId() {
         return boardId;
     }
 
-    public UUID getFigureId() {
-        return figureId;
+    public UUID getTextFigureId() {
+        return textFigureId;
     }
 }

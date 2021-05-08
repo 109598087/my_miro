@@ -29,9 +29,9 @@ public class BoardTest {
         // create fake figure (id)
         UUID figureId = UUID.randomUUID();
         // commit figure to its board
-        board.commitFigure(figureId);
+        board.commitTextFigure(figureId);
 
-        assertEquals(1, board.getCommittedFigures().size());
-        assertEquals(figureId, board.getCommittedFigures().get(0).getFigureId());
+        assertEquals(1, board.getCommittedTextFigures().size());
+        assertEquals(figureId, board.getCommittedTextFigures().get(0).getTextFigureId());
     }
 }

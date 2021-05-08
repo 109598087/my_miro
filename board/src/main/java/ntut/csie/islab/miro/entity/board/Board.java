@@ -1,7 +1,7 @@
 package ntut.csie.islab.miro.entity.board;
 
 import ntut.csie.islab.miro.entity.board.event.BoardCreatedDomainEvent;
-import ntut.csie.islab.miro.entity.board.event.FigureCommittedDomainEvent;
+import ntut.csie.islab.miro.entity.board.event.TextfigureCommittedDomainEvent;
 import ntut.csie.sslab.ddd.model.AggregateRoot;
 
 import java.util.ArrayList;
@@ -11,13 +11,13 @@ import java.util.UUID;
 public class Board extends AggregateRoot<UUID> {
     private UUID teamId;
     private String boardName;
-    private List<CommittedFigure> committedFigures;
+    private List<CommittedTextFigure> committedTextFigures;
 
     public Board(UUID teamId, String boardName) {
         super(UUID.randomUUID());
         this.teamId = teamId;
         this.boardName = boardName;
-        this.committedFigures = new ArrayList<>();
+        this.committedTextFigures = new ArrayList<>();
         addDomainEvent(new BoardCreatedDomainEvent(teamId, getBoardId(), boardName));
     }
 
@@ -41,17 +41,17 @@ public class Board extends AggregateRoot<UUID> {
         this.boardName = boardName;
     }
 
-    public void commitFigure(UUID figureId) {
-        addFigure(figureId);
-        addDomainEvent(new FigureCommittedDomainEvent(getBoardId(), figureId));
+    public void commitTextFigure(UUID figureId) {
+        addtextFigure(figureId);
+        addDomainEvent(new TextfigureCommittedDomainEvent(getBoardId(), figureId));
     }
 
-    private void addFigure(UUID figureId) {
-        CommittedFigure committedFigure = new CommittedFigure(getBoardId(), figureId);
-        committedFigures.add(committedFigure);
+    private void addtextFigure(UUID figureId) {
+        CommittedTextFigure committedtextFigure = new CommittedTextFigure(getBoardId(), figureId);
+        committedTextFigures.add(committedtextFigure);
     }
 
-    public List<CommittedFigure> getCommittedFigures() {
-        return committedFigures;
+    public List<CommittedTextFigure> getCommittedTextFigures() {
+        return committedTextFigures;
     }
 }

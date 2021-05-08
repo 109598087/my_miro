@@ -17,7 +17,7 @@ public class BoardDomainEventTest {
     }
 
     @Test
-    public void commit_a_figure_then_publishes_a_figure_committed_domain_event_test() {
+    public void commit_a_text_figure_then_publishes_a_figure_committed_domain_event_test() {
         // create board
         UUID teamId = UUID.randomUUID();
         String boardName = "boardName";
@@ -25,7 +25,7 @@ public class BoardDomainEventTest {
         // create fake figure (id)
         UUID figureId = UUID.randomUUID();
         // commit figure to its board
-        board.commitFigure(figureId);
+        board.commitTextFigure(figureId);
 
         assertEquals(2, board.getDomainEvents().size()); // BoardCreatedDomainEvent and FigureCommittedDomainEvent
     }

@@ -50,7 +50,7 @@ public abstract class TextFigure extends AggregateRoot<UUID> {
         this.style = style;
     }
 
-    public UUID getFigureId() {
+    public UUID getTextFigureId() {
         return this.getId();
     }
 }

@@ -48,9 +48,5 @@ public class CreateStickyNoteUseCaseTest {
         assertEquals(ExitCode.SUCCESS, output.getExitCode());
 
         assertEquals(boardId, textFigureRepository.findById(boardId, UUID.fromString(output.getId())).get().getBoardId());
-
-
-
-
     }
 }
