@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StickyNoteTest {
     @Test
-    public void stickynote_get_set_test(){
+    public void stickynote_get_test() {
         UUID boardId = UUID.randomUUID();
-        Position position = new Position(100, 100);
+        Position position = new Position();
         String content = "stickyNote content";
         Style style = new Style();
         TextFigure stickynote = new StickyNote(boardId, position, content, style);
@@ -26,7 +26,5 @@ public class StickyNoteTest {
         assertEquals(content, stickynote.getContent());
         // getStyleTest
         assertEquals(style, stickynote.getStyle());
-
-
     }
 }
