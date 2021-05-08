@@ -1,6 +1,7 @@
 package ntut.csie.islab.miro.entity.board;
 
 import ntut.csie.islab.miro.entity.board.event.BoardCreatedDomainEvent;
+import ntut.csie.islab.miro.entity.board.event.FigureCommittedDomainEvent;
 import ntut.csie.sslab.ddd.model.AggregateRoot;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class Board extends AggregateRoot<UUID> {
 
     public void commitFigure(UUID figureId) {
         addFigure(figureId);
+        addDomainEvent(new FigureCommittedDomainEvent(getBoardId(), figureId));
     }
 
     private void addFigure(UUID figureId) {
