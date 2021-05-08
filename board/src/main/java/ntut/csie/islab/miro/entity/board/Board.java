@@ -1,5 +1,6 @@
 package ntut.csie.islab.miro.entity.board;
 
+import ntut.csie.islab.miro.entity.board.event.BoardCreatedDomainEvent;
 import ntut.csie.sslab.ddd.model.AggregateRoot;
 
 import java.util.UUID;
@@ -12,6 +13,11 @@ public class Board extends AggregateRoot<UUID> {
         super(UUID.randomUUID());
         this.teamId = teamId;
         this.boardName = boardName;
+        addDomainEvent(new BoardCreatedDomainEvent(teamId, getBoardId()));
+    }
+
+    private UUID getBoardId() {
+        return this.getId();
     }
 
     public UUID getTeamId() {
