@@ -32,5 +32,6 @@ public class BoardTest {
         board.commitFigure(figureId);
 
         assertEquals(1, board.getCommittedFigures().size());
+        assertEquals(figureId, board.getCommittedFigures().get(0).getFigureId());
     }
 }
