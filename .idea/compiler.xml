@@ -33,7 +33,7 @@
     <bytecodeTargetLevel>
       <module name="board" target="1.8" />
       <module name="dddcore" target="1.8" />
-      <module name="ezKanban" target="1.6" />
+      <module name="my_miro" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

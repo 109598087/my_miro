@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/board/board.iml" filepath="$PROJECT_DIR$/board/board.iml" />
       <module fileurl="file://$PROJECT_DIR$/dddcore/dddcore.iml" filepath="$PROJECT_DIR$/dddcore/dddcore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ezKanban.iml" filepath="$PROJECT_DIR$/ezKanban.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my_miro.iml" filepath="$PROJECT_DIR$/my_miro.iml" />
     </modules>
   </component>
 </project>
