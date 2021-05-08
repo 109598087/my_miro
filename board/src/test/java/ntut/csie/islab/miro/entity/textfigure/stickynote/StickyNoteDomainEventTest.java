@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StickyNoteDomainEventTest {
 
     @Test
-    public void create_a_stickyNote_than_publishes_a_stickyNote_created_domain_event() {
+    public void create_a_stickyNote_than_publishes_a_stickyNote_created_domain_event_test() {
         TextFigure stickyNote = new StickyNote(UUID.randomUUID(), new Position(1.0, 1.0), "stickynote_content", new Style(20, ShapeKindEnum.RECTANGLE, 100, 100, "f9f900"));
         assertEquals(1, stickyNote.getDomainEvents().size());
     }
