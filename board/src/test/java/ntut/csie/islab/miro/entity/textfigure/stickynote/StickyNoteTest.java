@@ -28,6 +28,7 @@ public class StickyNoteTest {
         // getStyleTest
         assertEquals(style, stickynote.getStyle());
     }
+
     @Test
     public void stickynote_attribute_test() {
         UUID boardId = UUID.fromString("87b10f3a-7c1f-4ba8-b3a2-a61594772ff4");
@@ -49,6 +50,5 @@ public class StickyNoteTest {
         assertEquals(200, stickynote.getStyle().getWidth());
         assertEquals(200, stickynote.getStyle().getHeight());
         assertEquals("f9f900", stickynote.getStyle().getColor());
-
     }
 }
