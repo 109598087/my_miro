@@ -13,7 +13,7 @@ public class Board extends AggregateRoot<UUID> {
         super(UUID.randomUUID());
         this.teamId = teamId;
         this.boardName = boardName;
-        addDomainEvent(new BoardCreatedDomainEvent(teamId, getBoardId()));
+        addDomainEvent(new BoardCreatedDomainEvent(teamId, getBoardId(), boardName));
     }
 
     private UUID getBoardId() {

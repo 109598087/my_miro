@@ -10,7 +10,9 @@ public class BoardDomainEventTest {
 
     @Test
     public void create_a_board_then_publishes_a_board_created_domain_event(){
-        Board board = new Board(UUID.randomUUID(), "board_name");
+        UUID teamId = UUID.randomUUID();
+        String boardName = "board_name";
+        Board board = new Board(teamId, boardName);
         assertEquals(1, board.getDomainEvents().size());
     }
 }

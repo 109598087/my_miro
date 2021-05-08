@@ -19,4 +19,9 @@ public class BoardTest {
         // getBoardNameTest
         assertEquals(boardName, board.getBoardName());
     }
+
+    @Test
+    public void commit_a_sticknote() {
+//        Board board = createBoard();
+    }
 }
