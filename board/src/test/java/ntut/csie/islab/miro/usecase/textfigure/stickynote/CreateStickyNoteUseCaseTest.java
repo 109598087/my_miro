@@ -24,8 +24,8 @@ public class CreateStickyNoteUseCaseTest {
 
     @BeforeEach
     public void setUp(){
-        domainEventBus = new GoogleEventBus();
         textFigureRepository = new TextFigureRepository();
+        domainEventBus = new GoogleEventBus();
     }
 
     @Test
