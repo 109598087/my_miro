@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/board/board.iml" filepath="$PROJECT_DIR$/board/board.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dddcore/dddcore.iml" filepath="$PROJECT_DIR$/dddcore/dddcore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ezKanban.iml" filepath="$PROJECT_DIR$/ezKanban.iml" />
+    </modules>
+  </component>
+</project>
