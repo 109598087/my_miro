@@ -38,7 +38,7 @@ public class CreateBoardUseCaseTest {
 
         assertEquals(ExitCode.SUCCESS,output.getExitCode());
 
-        assertEquals(teamId, boardRepository.findById(teamId, UUID.fromString(output.getId())).get().getTeamId());
+        assertEquals(teamId, boardRepository.findById(UUID.fromString(output.getId())).get().getTeamId());
 
     }
 }

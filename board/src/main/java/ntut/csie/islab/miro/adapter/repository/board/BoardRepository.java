@@ -18,9 +18,8 @@ public class BoardRepository {
         this.boards.add(board);
     }
 
-    public Optional<Board> findById(UUID teamId, UUID boardId) {
+    public Optional<Board> findById(UUID boardId) {
         return this.boards.stream()
-                .filter(s -> teamId.equals(s.getTeamId()))
                 .filter(s -> boardId.equals(s.getId()))
                 .findFirst();
     }
