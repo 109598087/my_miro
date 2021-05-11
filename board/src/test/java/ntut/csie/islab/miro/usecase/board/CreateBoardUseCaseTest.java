@@ -8,28 +8,37 @@ import ntut.csie.sslab.ddd.usecase.cqrs.ExitCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.UUID;
 
-public class CreateBoardUseCaseTest {
-    public DomainEventBus domainEventBus;
-    public BoardRepository boardRepository;
-    @BeforeEach
-    public void setUp(){
-        domainEventBus = new GoogleEventBus();
-        boardRepository = new BoardRepository();
-    }
-    @Test
-    public void test_create_board(){
-        CreateBoardUseCase createBoardUseCase= new CreateBoardUseCase(domainEventBus,boardRepository);
-        CreateBoardInput input =  createBoardUseCase.newInput();
-        CqrsCommandPresenter output = CqrsCommandPresenter.newInstance();
-        input.setTeamId(UUID.randomUUID());
-        input.setBoardName("Board name");
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-        createBoardUseCase.execute(input,output);
+public class CreateBoardUseCaseTest {
+    public BoardRepository boardRepository;
+    public DomainEventBus domainEventBus;
+
+    @BeforeEach
+    public void setUp() {
+        boardRepository = new BoardRepository();
+        domainEventBus = new GoogleEventBus();
+    }
+
+    @Test
+    public void create_board_test() {
+        CreateBoardUseCase createBoardUseCase = new CreateBoardUseCase(boardRepository, domainEventBus);
+        CreateBoardInput input = createBoardUseCase.newInput();
+        CqrsCommandPresenter output = CqrsCommandPresenter.newInstance();
+        UUID teamId = UUID.randomUUID();
+        String boardName = "boardName";
+        input.setTeamId(teamId);
+        input.setBoardName(boardName);
+        createBoardUseCase.execute(input, output);
+
         assertNotNull(output.getId());
+
         assertEquals(ExitCode.SUCCESS,output.getExitCode());
+
+        assertEquals(teamId, boardRepository.findById(UUID.fromString(output.getId())).get().getTeamId());
+
     }
 }

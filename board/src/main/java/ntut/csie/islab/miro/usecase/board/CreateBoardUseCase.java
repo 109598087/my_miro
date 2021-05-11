@@ -10,7 +10,7 @@ public class CreateBoardUseCase {
     private DomainEventBus domainEventBus;
     private BoardRepository boardRepository;
 
-    public CreateBoardUseCase(DomainEventBus domainEventBus, BoardRepository boardRepository) {
+    public CreateBoardUseCase(BoardRepository boardRepository, DomainEventBus domainEventBus) {
         this.domainEventBus = domainEventBus;
         this.boardRepository = boardRepository;
     }

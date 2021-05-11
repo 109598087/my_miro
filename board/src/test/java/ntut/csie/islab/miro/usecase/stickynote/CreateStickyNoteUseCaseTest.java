@@ -1,47 +1,52 @@
 package ntut.csie.islab.miro.usecase.stickynote;
 
-
 import ntut.csie.islab.miro.adapter.repository.textFigure.TextFigureRepository;
+import ntut.csie.islab.miro.entity.model.textFigure.Position;
 import ntut.csie.islab.miro.entity.model.textFigure.ShapeKindEnum;
 import ntut.csie.islab.miro.entity.model.textFigure.Style;
-import ntut.csie.islab.miro.usecase.textfigure.stickynote.CreateStickyNoteInput;
 import ntut.csie.islab.miro.usecase.textfigure.stickynote.CreateStickyNoteUseCase;
+import ntut.csie.islab.miro.usecase.textfigure.stickynote.CreateStickyNoteInput;
 import ntut.csie.sslab.ddd.adapter.gateway.GoogleEventBus;
+import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandPresenter;
 import ntut.csie.sslab.ddd.model.DomainEventBus;
 import ntut.csie.sslab.ddd.usecase.cqrs.ExitCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandPresenter;
+
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class CreateStickyNoteUseCaseTest {
+    public TextFigureRepository textFigureRepository;
     public DomainEventBus domainEventBus;
-    public TextFigureRepository stickyNoteRepository;
+
     @BeforeEach
     public void setUp(){
+        textFigureRepository = new TextFigureRepository();
         domainEventBus = new GoogleEventBus();
-        stickyNoteRepository = new TextFigureRepository();
     }
 
     @Test
-    public void test_create_sticky_note(){
-        CreateStickyNoteUseCase createStickyNoteUseCase = new CreateStickyNoteUseCase(stickyNoteRepository, domainEventBus);
+    public void create_stickyNote_in_board_test() {
+        CreateStickyNoteUseCase createStickyNoteUseCase = new CreateStickyNoteUseCase(textFigureRepository, domainEventBus);
         CreateStickyNoteInput input = createStickyNoteUseCase.newInput();
         CqrsCommandPresenter output = CqrsCommandPresenter.newInstance();
         UUID boardId = UUID.randomUUID();
+        Position position = new Position(100, 100);
+        String content = "";
+        Style style = new Style(20, ShapeKindEnum.RECTANGLE, 200, 200, "#f9f900");
         input.setBoardId(boardId);
-        input.setPosition(1.0,1.0);
-        input.setContent("");
-        input.setStyle(new Style(12, ShapeKindEnum.CIRCLE, 87.87,100, "#948700"));
+        input.setPosition(position);
+        input.setContent(content);
+        input.setStyle(style);
         createStickyNoteUseCase.execute(input, output);
 
         assertNotNull(output.getId());
-        assertEquals(ExitCode.SUCCESS,output.getExitCode());
-        assertEquals(boardId,stickyNoteRepository.findById(boardId, UUID.fromString(output.getId())).get().getBoardId());
-        assertNotNull(stickyNoteRepository.findById(boardId, UUID.fromString(output.getId())).get());
-        assertEquals("", stickyNoteRepository.findById(boardId, UUID.fromString(output.getId())).get().getContent());
-    }
 
+        assertEquals(ExitCode.SUCCESS, output.getExitCode());
+
+        assertEquals(boardId, textFigureRepository.findById(boardId, UUID.fromString(output.getId())).get().getBoardId());
+    }
 }

@@ -25,7 +25,7 @@ public class UseCaseInjection {
 
     @Bean(name = "createBoardUseCase")
     public CreateBoardUseCase createBoardUseCase() {
-        return new CreateBoardUseCase(eventBus, boardRepository);
+        return new CreateBoardUseCase(boardRepository, eventBus);
     }
 
     @Bean(name = "createStickyNoteUseCase")
