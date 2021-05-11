@@ -1,4 +1,4 @@
-package ntut.csie.islab.miro.entity.model.stickyNote;
+package ntut.csie.islab.miro.entity.textfigure.stickyNote;
 
 import ntut.csie.islab.miro.entity.model.textFigure.TextFigure;
 import ntut.csie.islab.miro.entity.model.textFigure.Position;

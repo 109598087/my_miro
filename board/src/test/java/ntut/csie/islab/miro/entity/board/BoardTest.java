@@ -1,5 +1,6 @@
-package ntut.csie.islab.miro.entity.model.board;
+package ntut.csie.islab.miro.entity.board;
 
+import ntut.csie.islab.miro.entity.model.board.Board;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
