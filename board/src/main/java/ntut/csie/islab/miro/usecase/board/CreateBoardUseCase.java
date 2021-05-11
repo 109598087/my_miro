@@ -7,12 +7,12 @@ import ntut.csie.sslab.ddd.model.DomainEventBus;
 import ntut.csie.sslab.ddd.usecase.cqrs.ExitCode;
 
 public class CreateBoardUseCase {
-    private DomainEventBus domainEventBus;
     private BoardRepository boardRepository;
+    private DomainEventBus domainEventBus;
 
     public CreateBoardUseCase(BoardRepository boardRepository, DomainEventBus domainEventBus) {
-        this.domainEventBus = domainEventBus;
         this.boardRepository = boardRepository;
+        this.domainEventBus = domainEventBus;
     }
 
     public CreateBoardInput newInput() {
@@ -20,9 +20,7 @@ public class CreateBoardUseCase {
     }
 
     public void execute(CreateBoardInput input, CqrsCommandPresenter output) {
-        Board board = new Board(input.getTeamId(),input.getBoardName());
-
-
+        Board board = new Board(input.getTeamId(), input.getBoardName());
         this.boardRepository.save(board);
         this.domainEventBus.postAll(board);
         output.setId(board.getId().toString());
