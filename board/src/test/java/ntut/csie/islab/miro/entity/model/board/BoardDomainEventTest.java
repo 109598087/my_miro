@@ -1,6 +1,5 @@
-package ntut.csie.islab.miro.entity.board;
+package ntut.csie.islab.miro.entity.model.board;
 
-import ntut.csie.islab.miro.entity.model.board.Board;
 import ntut.csie.islab.miro.entity.model.board.event.FigureCommittedDomainEvent;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

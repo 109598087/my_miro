@@ -1,4 +1,4 @@
-package ntut.csie.islab.miro.usecase.testfigure.stickyNote;
+package ntut.csie.islab.miro.usecase.stickyNote;
 
 
 import ntut.csie.islab.miro.adapter.repository.textFigure.TextFigureRepository;
