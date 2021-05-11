@@ -12,7 +12,7 @@ export default {
 }
 </script>
 <style>
-@import './assets/styles/contextMenuStyle.css';
+@import 'src/assets/styles/contextMenuStyle.css';
 #nav a {
   font-weight: bold;
   color: #2c3e50;
