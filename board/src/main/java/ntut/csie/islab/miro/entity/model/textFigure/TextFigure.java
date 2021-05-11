@@ -56,13 +56,5 @@ public abstract class TextFigure extends AggregateRoot<UUID> {
         return this.getId();
     }
 
-    public abstract void markAsRemoved(UUID boardId, UUID figureId);
 
-    public abstract void changeContent(String newContent);
-
-    public abstract void changePosition(Position newPosition);
-
-    public abstract void changeColor(String newColor);
-
-    public abstract void resize(Double newWidth, Double newHeight);
 }
