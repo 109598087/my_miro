@@ -4,7 +4,7 @@ import ntut.csie.islab.miro.adapter.repository.board.BoardRepository;
 import ntut.csie.islab.miro.adapter.repository.textFigure.TextFigureRepository;
 import ntut.csie.islab.miro.usecase.board.CreateBoardUseCase;
 import ntut.csie.islab.miro.usecase.eventHandler.NotifyBoard;
-import ntut.csie.islab.miro.usecase.textFigure.stickyNote.*;
+import ntut.csie.islab.miro.usecase.textfigure.stickynote.*;
 import ntut.csie.sslab.ddd.model.DomainEventBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

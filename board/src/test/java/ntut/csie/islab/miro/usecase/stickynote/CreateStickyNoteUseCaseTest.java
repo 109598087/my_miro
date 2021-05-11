@@ -1,11 +1,11 @@
-package ntut.csie.islab.miro.usecase.stickyNote;
+package ntut.csie.islab.miro.usecase.stickynote;
 
 
 import ntut.csie.islab.miro.adapter.repository.textFigure.TextFigureRepository;
 import ntut.csie.islab.miro.entity.model.textFigure.ShapeKindEnum;
 import ntut.csie.islab.miro.entity.model.textFigure.Style;
-import ntut.csie.islab.miro.usecase.textFigure.stickyNote.CreateStickyNoteInput;
-import ntut.csie.islab.miro.usecase.textFigure.stickyNote.CreateStickyNoteUseCase;
+import ntut.csie.islab.miro.usecase.textfigure.stickynote.CreateStickyNoteInput;
+import ntut.csie.islab.miro.usecase.textfigure.stickynote.CreateStickyNoteUseCase;
 import ntut.csie.sslab.ddd.adapter.gateway.GoogleEventBus;
 import ntut.csie.sslab.ddd.model.DomainEventBus;
 import ntut.csie.sslab.ddd.usecase.cqrs.ExitCode;

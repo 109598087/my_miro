@@ -1,11 +1,10 @@
-package ntut.csie.islab.miro.entity.model.stickyNote;
+package ntut.csie.islab.miro.entity.model.stickynote;
 
 import ntut.csie.islab.miro.entity.model.textFigure.TextFigure;
 import ntut.csie.islab.miro.entity.model.textFigure.Position;
 import ntut.csie.islab.miro.entity.model.textFigure.ShapeKindEnum;
 import ntut.csie.islab.miro.entity.model.textFigure.Style;
 import ntut.csie.islab.miro.entity.model.textFigure.stickynote.StickyNote;
-import ntut.csie.islab.miro.entity.model.textFigure.stickynote.event.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
