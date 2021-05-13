@@ -1,23 +1,15 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
+import HelloWorld from '@/components/HelloWorld'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-const routes = [
-  {
-    path: '/board',
-    name: 'Board',
-    component: () =>
-      import('../components/Board.vue')
-  }
-]
-
-const router = new VueRouter(
-  {
-    mode: 'hash',
-    base: process.env.BASE_URL,
-    routes
-  }
-)
-
-export default router
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'HelloWorld',
+      component: HelloWorld
+    }
+  ]
+})
