@@ -1,4 +1,4 @@
-package ntut.csie.islab.miro.usecase.textfigure.stickynote;
+package ntut.csie.islab.miro.usecase.textfigure.stickynote.create;
 
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
 import ntut.csie.islab.miro.entity.model.textFigure.TextFigure;

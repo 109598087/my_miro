@@ -1,4 +1,4 @@
-package ntut.csie.islab.miro.usecase.board;
+package ntut.csie.islab.miro.usecase.board.create;
 
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository;
 import ntut.csie.islab.miro.entity.model.board.Board;

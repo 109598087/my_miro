@@ -1,4 +1,4 @@
-package ntut.csie.islab.miro.adapter.gateway.eventbus.google.repository.textFigure;
+package ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure;
 
 import ntut.csie.islab.miro.entity.model.textFigure.TextFigure;
 

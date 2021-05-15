@@ -1,7 +1,7 @@
 package ntut.csie.islab.miro.application.springboot.web.config;
 
-import ntut.csie.islab.miro.adapter.repository.board.BoardRepository;
-import ntut.csie.islab.miro.adapter.repository.textFigure.TextFigureRepository;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
 import ntut.csie.sslab.ddd.adapter.gateway.GoogleEventBus;
 import ntut.csie.sslab.ddd.model.DomainEventBus;
 import org.springframework.context.annotation.Bean;

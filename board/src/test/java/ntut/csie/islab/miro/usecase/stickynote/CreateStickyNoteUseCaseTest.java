@@ -1,11 +1,11 @@
 package ntut.csie.islab.miro.usecase.stickynote;
 
-import ntut.csie.islab.miro.adapter.repository.textFigure.TextFigureRepository;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
 import ntut.csie.islab.miro.entity.model.textFigure.Position;
 import ntut.csie.islab.miro.entity.model.textFigure.ShapeKindEnum;
 import ntut.csie.islab.miro.entity.model.textFigure.Style;
-import ntut.csie.islab.miro.usecase.textfigure.stickynote.CreateStickyNoteUseCase;
-import ntut.csie.islab.miro.usecase.textfigure.stickynote.CreateStickyNoteInput;
+import ntut.csie.islab.miro.usecase.textfigure.stickynote.create.CreateStickyNoteUseCase;
+import ntut.csie.islab.miro.usecase.textfigure.stickynote.create.CreateStickyNoteInput;
 import ntut.csie.sslab.ddd.adapter.gateway.GoogleEventBus;
 import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandPresenter;
 import ntut.csie.sslab.ddd.model.DomainEventBus;
