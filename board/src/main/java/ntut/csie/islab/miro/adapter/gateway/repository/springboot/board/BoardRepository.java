@@ -1,4 +1,4 @@
-package ntut.csie.islab.miro.adapter.repository.board;
+package ntut.csie.islab.miro.adapter.gateway.eventbus.google.repository.board;
 
 import ntut.csie.islab.miro.entity.model.board.Board;
 
