@@ -3,25 +3,27 @@ package ntut.csie.islab.miro.adapter.presenter;
 import ntut.csie.islab.miro.usecase.board.getcontent.GetBoardContentOutput;
 import ntut.csie.islab.miro.usecase.textfigure.TextFigureDto;
 import ntut.csie.sslab.ddd.adapter.presenter.Presenter;
-import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandViewModel;
 import ntut.csie.sslab.ddd.usecase.Result;
 
 import java.util.List;
 import java.util.UUID;
 
-public class GetBoardContentPresenter extends Result implements Presenter<CqrsCommandViewModel>, GetBoardContentOutput {
+public class GetBoardContentPresenter extends Result implements Presenter<BoardContentViewModel>, GetBoardContentOutput { //todo: BoardContentViewModel -> CqrsCommandViewModel
     private UUID boardId;
     private List<TextFigureDto> textFigureDtos;
 
-    @Override // todo: need add
-    public CqrsCommandViewModel buildViewModel() {
-        return null;
+    @Override
+    public BoardContentViewModel buildViewModel() {
+        BoardContentViewModel boardContentViewModel = new BoardContentViewModel();
+        boardContentViewModel.setBoardId(this.boardId);
+        boardContentViewModel.setTextFigureDtos(this.textFigureDtos);
+        return boardContentViewModel;
     }
 
     @Override
     public GetBoardContentOutput setBoardId(UUID boardId) {
         this.boardId = boardId;
-        return null; // todo: ?
+        return this; // todo: this?
     }
 
     @Override
@@ -32,7 +34,7 @@ public class GetBoardContentPresenter extends Result implements Presenter<CqrsCo
     @Override
     public GetBoardContentOutput setTextFigures(List<TextFigureDto> textFigureDtos) {
         this.textFigureDtos = textFigureDtos;
-        return null; // todo: ?
+        return this; // todo: this ?
     }
 
     @Override
