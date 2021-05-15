@@ -21,5 +21,4 @@ public class NotifyBoardAdapter { // for commit textFigure to board
     }
 
 
-
 }

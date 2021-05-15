@@ -8,6 +8,7 @@ import java.util.UUID;
 public class StickyNoteCreatedDomainEvent extends DomainEvent {
     private final UUID boardId;
     private final UUID figureId;
+
     public StickyNoteCreatedDomainEvent(UUID boardId, UUID figureId) {
         super(DateProvider.now());
         this.boardId = boardId;

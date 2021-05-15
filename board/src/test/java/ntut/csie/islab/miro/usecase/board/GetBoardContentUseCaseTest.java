@@ -5,12 +5,9 @@ import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRep
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
 import ntut.csie.islab.miro.adapter.presenter.BoardContentViewModel;
 import ntut.csie.islab.miro.adapter.presenter.GetBoardContentPresenter;
-import ntut.csie.islab.miro.entity.model.board.Board;
 import ntut.csie.islab.miro.entity.model.textFigure.Position;
 import ntut.csie.islab.miro.entity.model.textFigure.ShapeKindEnum;
 import ntut.csie.islab.miro.entity.model.textFigure.Style;
-import ntut.csie.islab.miro.entity.model.textFigure.TextFigure;
-import ntut.csie.islab.miro.entity.model.textFigure.stickynote.StickyNote;
 import ntut.csie.islab.miro.usecase.board.create.CreateBoardInput;
 import ntut.csie.islab.miro.usecase.board.create.CreateBoardUseCase;
 import ntut.csie.islab.miro.usecase.board.create.GetBoardContentInput;
@@ -20,7 +17,6 @@ import ntut.csie.islab.miro.usecase.textfigure.stickynote.create.CreateStickyNot
 import ntut.csie.islab.miro.usecase.textfigure.stickynote.create.CreateStickyNoteUseCase;
 import ntut.csie.sslab.ddd.adapter.gateway.GoogleEventBus;
 import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandPresenter;
-import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandViewModel;
 import ntut.csie.sslab.ddd.model.DomainEventBus;
 
 //import org.junit.Test; -> //java.lang.NullPointerException: Cannot invoke "ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository.findById(java.util.UUID)" because "this.boardRepository" is null
