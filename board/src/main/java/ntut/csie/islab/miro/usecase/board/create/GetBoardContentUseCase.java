@@ -14,6 +14,7 @@ import ntut.csie.sslab.ddd.usecase.cqrs.ExitCode;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GetBoardContentUseCase {
     private BoardRepository boardRepository;
     private TextFigureRepository textFigureRepository;
@@ -36,16 +37,14 @@ public class GetBoardContentUseCase {
                     .setExitCode(ExitCode.FAILURE)
                     .setMessage("Get board failed: board not found, board if = " + output.getBoardId());
         }
-
-//         textFigure => committedTextFigure
+        // textFigure => committedTextFigure
         List<TextFigure> textFigures = new ArrayList<>();
         List<CommittedTextFigure> committedTextFigures = board.getCommittedTextFigures();
 
         for (CommittedTextFigure committedTextFigure : committedTextFigures) {
-            TextFigure textFigure = textFigureRepository.findById(board.getId(), committedTextFigure.getTextFigureId()).get();
+            TextFigure textFigure = this.textFigureRepository.findById(board.getId(), committedTextFigure.getTextFigureId()).get();
             textFigures.add(textFigure);
         }
-
         // textFigure to textFigureDto
         List<TextFigureDto> textFigureDtos = ConvertTextFigureToDto.transform(textFigures);
 

@@ -52,6 +52,6 @@ public class Board extends AggregateRoot<UUID> {
     }
 
     public List<CommittedTextFigure> getCommittedTextFigures() {
-        return committedTextFigures;
+        return this.committedTextFigures;
     }
 }

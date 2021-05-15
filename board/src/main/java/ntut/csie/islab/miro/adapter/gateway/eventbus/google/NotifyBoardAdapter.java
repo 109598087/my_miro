@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NotifyBoardAdapter {
+public class NotifyBoardAdapter { // for commit textFigure to board
     private NotifyBoard notifyBoard;
 
     @Autowired

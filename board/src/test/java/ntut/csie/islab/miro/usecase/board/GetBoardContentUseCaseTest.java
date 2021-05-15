@@ -1,14 +1,23 @@
 package ntut.csie.islab.miro.usecase.board;
 
+import ntut.csie.islab.miro.adapter.gateway.eventbus.google.NotifyBoardAdapter;
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository;
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
 import ntut.csie.islab.miro.adapter.presenter.BoardContentViewModel;
 import ntut.csie.islab.miro.adapter.presenter.GetBoardContentPresenter;
 import ntut.csie.islab.miro.entity.model.board.Board;
+import ntut.csie.islab.miro.entity.model.textFigure.Position;
+import ntut.csie.islab.miro.entity.model.textFigure.ShapeKindEnum;
+import ntut.csie.islab.miro.entity.model.textFigure.Style;
+import ntut.csie.islab.miro.entity.model.textFigure.TextFigure;
+import ntut.csie.islab.miro.entity.model.textFigure.stickynote.StickyNote;
 import ntut.csie.islab.miro.usecase.board.create.CreateBoardInput;
 import ntut.csie.islab.miro.usecase.board.create.CreateBoardUseCase;
 import ntut.csie.islab.miro.usecase.board.create.GetBoardContentInput;
 import ntut.csie.islab.miro.usecase.board.create.GetBoardContentUseCase;
+import ntut.csie.islab.miro.usecase.eventHandler.NotifyBoard;
+import ntut.csie.islab.miro.usecase.textfigure.stickynote.create.CreateStickyNoteInput;
+import ntut.csie.islab.miro.usecase.textfigure.stickynote.create.CreateStickyNoteUseCase;
 import ntut.csie.sslab.ddd.adapter.gateway.GoogleEventBus;
 import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandPresenter;
 import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandViewModel;
@@ -27,12 +36,15 @@ public class GetBoardContentUseCaseTest {
     public BoardRepository boardRepository;
     public TextFigureRepository textFigureRepository;
     public DomainEventBus domainEventBus;
+    public NotifyBoardAdapter notifyBoardAdapter; //todo: see when commit textFigure to board
 
     @BeforeEach
     public void setUp() {
         boardRepository = new BoardRepository();
         textFigureRepository = new TextFigureRepository();
         domainEventBus = new GoogleEventBus();
+        notifyBoardAdapter = new NotifyBoardAdapter(new NotifyBoard(boardRepository, domainEventBus));
+        domainEventBus.register(notifyBoardAdapter);
     }
 
     @Test
@@ -65,8 +77,52 @@ public class GetBoardContentUseCaseTest {
 
         assertEquals(UUID.fromString(createBoardOutput.getId()), boardContentViewModel.getBoardId());
         assertEquals(0, boardContentViewModel.getTextFigureDtos().size());
+    }
 
+    @Test
+    public void test_get_board_content_with_stickyNote_board() {
+        GetBoardContentUseCase getBoardContentUseCase = new GetBoardContentUseCase(boardRepository,  textFigureRepository,  domainEventBus); //todo: add this?
+        GetBoardContentInput input = getBoardContentUseCase.newInput();
+        GetBoardContentPresenter output = new GetBoardContentPresenter();
 
+        // create a board
+        CreateBoardUseCase createBoardUseCase = new CreateBoardUseCase(boardRepository, domainEventBus);
+        CreateBoardInput createBoardInput = createBoardUseCase.newInput();
+        CqrsCommandPresenter createBoardOutput = CqrsCommandPresenter.newInstance();
+        UUID teamID = UUID.randomUUID();
+        String boardName = "boardName";
+        createBoardInput.setTeamId(teamID);
+        createBoardInput.setBoardName(boardName);
+        createBoardUseCase.execute(createBoardInput, createBoardOutput);
+
+        // create a stickyNote
+        CreateStickyNoteUseCase createStickyNoteUseCase = new CreateStickyNoteUseCase(textFigureRepository, domainEventBus);
+        CreateStickyNoteInput createStickyNoteInput = createStickyNoteUseCase.newInput();
+        CqrsCommandPresenter createStickyNoteOutput = CqrsCommandPresenter.newInstance();
+        UUID boardId = UUID.fromString(createBoardOutput.getId()); // this is same boardId!
+        System.out.println(boardId);
+        Position position = new Position(100, 100);
+        String content = "";
+        Style style = new Style(20, ShapeKindEnum.RECTANGLE, 200, 200, "#f9f900");
+        createStickyNoteInput.setBoardId(boardId);
+        createStickyNoteInput.setPosition(position);
+        createStickyNoteInput.setContent(content);
+        createStickyNoteInput.setStyle(style);
+        createStickyNoteUseCase.execute(createStickyNoteInput, createStickyNoteOutput);
+
+        // set
+        input.setBoardId(UUID.fromString(createBoardOutput.getId()));
+
+        // execute
+        getBoardContentUseCase.execute(input, output);
+
+        assertEquals(UUID.fromString(createBoardOutput.getId()), output.getBoardId());
+        assertEquals(1, output.getTextFigures().size());
+
+        // buildViewModel
+        BoardContentViewModel boardContentViewModel = output.buildViewModel();
+        assertEquals(UUID.fromString(createBoardOutput.getId()), boardContentViewModel.getBoardId());
+        assertEquals(1, boardContentViewModel.getTextFigureDtos().size());
 
     }
 }
