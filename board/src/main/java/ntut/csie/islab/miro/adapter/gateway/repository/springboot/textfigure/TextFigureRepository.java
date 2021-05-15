@@ -17,7 +17,7 @@ public class TextFigureRepository {  //todo: repository test
     public void save(TextFigure textFigure) {
         textFigures.add(textFigure);
     }
-
+    // todo: maybe Optional<textFigure> -> TextFigure
     public Optional<TextFigure> findById(UUID boardId, UUID textFigureId) {
         return textFigures.stream()
                 .filter(s -> boardId.equals(s.getBoardId()))
