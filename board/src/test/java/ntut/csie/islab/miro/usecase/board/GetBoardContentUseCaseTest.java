@@ -119,6 +119,5 @@ public class GetBoardContentUseCaseTest {
         BoardContentViewModel boardContentViewModel = output.buildViewModel();
         assertEquals(UUID.fromString(createBoardOutput.getId()), boardContentViewModel.getBoardId());
         assertEquals(1, boardContentViewModel.getTextFigureDtos().size());
-
     }
 }

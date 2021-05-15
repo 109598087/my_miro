@@ -3,6 +3,7 @@ package ntut.csie.islab.miro.application.springboot.web.config;
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository;
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
 import ntut.csie.islab.miro.usecase.board.create.CreateBoardUseCase;
+import ntut.csie.islab.miro.usecase.board.create.GetBoardContentUseCase;
 import ntut.csie.islab.miro.usecase.eventHandler.NotifyBoard;
 import ntut.csie.islab.miro.usecase.textfigure.stickynote.create.CreateStickyNoteUseCase;
 import ntut.csie.sslab.ddd.model.DomainEventBus;
@@ -31,6 +32,11 @@ public class UseCaseInjection {
     @Bean(name = "createStickyNoteUseCase")
     public CreateStickyNoteUseCase createStickyNoteUseCase() {
         return new CreateStickyNoteUseCase(textFigureRepository, eventBus);
+    }
+
+    @Bean(name = "getBoardContentUseCase")
+    public GetBoardContentUseCase getBoardContentUseCase() {
+        return new GetBoardContentUseCase(boardRepository, textFigureRepository, eventBus);
     }
 
     @Autowired
