@@ -7,6 +7,7 @@ import ntut.csie.islab.miro.entity.model.textFigure.stickynote.event.StickyNoteC
 import ntut.csie.sslab.ddd.model.DomainEventBus;
 
 import java.util.Optional;
+
 public class NotifyBoard {
     private BoardRepository boardRepository;
     private DomainEventBus domainEventBus;
@@ -15,7 +16,6 @@ public class NotifyBoard {
         this.boardRepository = boardRepository;
         this.domainEventBus = domainEventBus;
     }
-
 
     public void whenTextFigureCreated(StickyNoteCreatedDomainEvent stickyNoteCreatedDomainEvent) {
         Optional<Board> board = boardRepository.findById(stickyNoteCreatedDomainEvent.getBoardId());

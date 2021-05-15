@@ -44,7 +44,7 @@ public class GetBoardContentUseCaseTest {
         textFigureRepository = new TextFigureRepository();
         domainEventBus = new GoogleEventBus();
         notifyBoardAdapter = new NotifyBoardAdapter(new NotifyBoard(boardRepository, domainEventBus));
-        domainEventBus.register(notifyBoardAdapter);
+        domainEventBus.register(notifyBoardAdapter); // this include : commit textFigure to board
     }
 
     @Test
