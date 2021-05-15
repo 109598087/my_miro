@@ -21,7 +21,7 @@ public class BoardTest {
     }
 
     @Test
-    public void commit_a_sticknote() {
+    public void commit_a_stickynote() {
         // create board
         UUID teamId = UUID.randomUUID();
         String boardName = "boardName";
