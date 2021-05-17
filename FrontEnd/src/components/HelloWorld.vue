@@ -10,6 +10,7 @@
 
 <script>
 import { fabric } from 'fabric' // npm install --save fabric
+import axios from 'axios' // npm install --save axios
 export default {
   name: 'HelloWorld',
   data () {
