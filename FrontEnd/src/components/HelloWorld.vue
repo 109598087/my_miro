@@ -1,49 +1,34 @@
 <template>
   <!-- <button @click="drawARect">畫圖</button> -->
   <div><button id="createStickyNoteButton" @click="createStickyNote()">Add New StickyNote</button>
-
-    <!--          <div>-->
-    <!--            content: <input type="text" placeholder="" v-model="figurecontent"><br>-->
-
-    <!--          </div>-->
-
-    <!--        <div><button id="editStickyNoteButton" @click="editStickyNote('7d9813e1-6360-4b58-a333-b1935af350d2')">Edit StickyNote</button></div>-->
     <canvas id="canvas" ref='board' ></canvas></div>
 
 </template>
 
 <script>
-// import { markRaw } from '@vue/reactivity'
 import { fabric } from 'fabric'
 import axios from 'axios'
 
 export default {
-
   data () {
     return {
       boardId: null,
       canvasContext: null,
       boardContent: null,
-      canvas: null,
-      time: 0
+      canvas: null
     }
   },
   async mounted () {
     this.boardContent = this.getBoardContent()
     this.initCanvas()
     this.canvas.renderAll()
-    this.listenEventsOnCanvas()
     // this.timer = setInterval(this.refreshCanvas, 10000)
   },
   methods: {
-    // figurecontent: undefined,
     async getBoardContent () {
       try {
         this.boardId = '6b9d885c-98f5-4756-9534-05abe8d76394'
         const res = await axios.get('http://localhost:8081/boards/' + this.boardId + '/content')
-        console.log('res.data: ', res.data)
-        // return res.data
-        console.log('res.data.textFigureDtos', res.data.textFigureDtos)
         this.drawStickyNote(res.data.textFigureDtos)
       } catch (err) {
         console.log(err)
@@ -58,11 +43,8 @@ export default {
 
     drawStickyNote (textFigureDtos) {
       var _this = this
-      console.log('in drawStickyNote')
       for (let i = 0; i < textFigureDtos.length; i++) {
         const figure = textFigureDtos[i]
-        // console.log(figure)
-        console.log('figure.style:' + figure.style)
         var rect = new fabric.Rect({
           originX: 'center',
           originY: 'center',
@@ -96,68 +78,12 @@ export default {
             }
           }
         )
-        console.log(res.data.message)
-        // return res.data
+        console.log(res)
       } catch (err) {
         console.log(err)
       }
       // this.refreshCanvas()
-    },
-    async editStickyNote (figure) {
-      try {
-        console.log(figure)
-        const res = await axios.post('http://localhost:8081/board/' + this.boardId + '/editStickyNote',
-          {
-            figureId: figure.get('id'),
-            content: figure.get('content'),
-            style: {
-              fontSize: 50,
-              shape: 2,
-              width: parseFloat(figure.width) * parseFloat(figure.get('ScaleX')),
-              height: parseFloat(figure.height) * parseFloat(figure.get('ScaleY')),
-              color: figure.get('color')
-            }
-          }
-        )
-        console.log(res.data.message)
-      } catch (err) {
-        console.log(err)
-      }
-      // this.refreshCanvas()
-    },
-    listenEventsOnCanvas () {
-      var _this = this
-      var canvas = this.canvas
-      canvas.on(
-        {
-          'object:selected': function (e) {
-            console.log('object:selected')
-            e.target.opacity = 0.5
-            // console.log(e.target)
-            // console.log(e.target.get('type'))
-            // console.log(e.target.getSrc())
-          },
-          'object:scaled': function (e) {
-            console.log('object:scaled')
-            _this.editStickyNote(e.target)
-            console.log(e.target)
-            console.log(e.target.get('scaleX'))
-            console.log(e.target.get('scaleY'))
-          },
-          'object:moved': function (e) {
-            console.log('object:moved')
-            console.log(e.target)
-            console.log(e.target.get('scaleX'))
-            console.log(e.target.get('scaleY'))
-          },
-          'object:modified': function (e) {
-            console.log('object:modified')
-            // var ao = canvas.getActiveObject()
-          }
-
-        })
     }
   }
-
 }
 </script>
