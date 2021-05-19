@@ -14,7 +14,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      boardId: '6b9d885c-98f5-4756-9534-05abe8d76394',
+      boardId: '6e8d971a-40b5-4d03-b167-d5a18e771d87',
       canvasContext: null,
       boardContent: null,
       canvas: null
@@ -51,7 +51,19 @@ export default {
           height: textFigureDtos[i].style.height,
           fill: textFigureDtos[i].style.color
         })
-        _this.canvas.add(rect)
+        let text = new fabric.IText(textFigureDtos[i].content, {
+          fontSize: textFigureDtos[i].style.fontSize,
+          originX: 'center',
+          originY: 'center'
+        })
+        let group = new fabric.Group([rect, text], {
+          id: textFigureDtos[i].figureId,
+          content: textFigureDtos[i].content,
+          top: textFigureDtos[i].position.y,
+          left: textFigureDtos[i].position.x,
+          subTargetCheck: true
+        })
+        _this.canvas.add(group)
       }
     },
     refreshCanvas () {
