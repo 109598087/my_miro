@@ -24,4 +24,8 @@ public class TextFigureRepository {  //todo: repository test
                 .filter(s -> textFigureId.equals(s.getTextFigureId()))
                 .findFirst();
     }
+
+    public void delete(TextFigure stickyNote) {
+        textFigures.remove(stickyNote);
+    }
 }
