@@ -14,17 +14,11 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      boardId: '6e8d971a-40b5-4d03-b167-d5a18e771d87',
+      boardId: '65d7d0e1-ce2c-42a5-a603-3c8f1350a3de',
       canvasContext: null,
       boardContent: null,
       canvas: null
     }
-  },
-  async mounted () {
-    this.initCanvas()
-    this.boardContent = this.getBoardContent()
-    this.canvas.renderAll()
-    // this.timer = setInterval(this.refreshCanvas, 10000)
   },
   methods: {
     initCanvas () {
@@ -92,8 +86,14 @@ export default {
       } catch (err) {
         console.log(err)
       }
-      // this.refreshCanvas()
+      this.refreshCanvas()
     }
+  },
+  async mounted () {
+    this.initCanvas()
+    this.boardContent = this.getBoardContent()
+    this.canvas.renderAll()
+    // this.timer = setInterval(this.refreshCanvas, 10000)
   }
 }
 </script>
