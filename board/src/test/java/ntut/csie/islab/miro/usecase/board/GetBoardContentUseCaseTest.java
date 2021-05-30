@@ -2,7 +2,8 @@ package ntut.csie.islab.miro.usecase.board;
 
 import ntut.csie.islab.miro.adapter.gateway.eventbus.google.NotifyBoardAdapter;
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository;
-import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.StickyNoteRepositoryImpl;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.stickynote.StickyNoteRepositoryPeer;
 import ntut.csie.islab.miro.adapter.presenter.BoardContentViewModel;
 import ntut.csie.islab.miro.adapter.presenter.GetBoardContentPresenter;
 import ntut.csie.islab.miro.entity.model.textFigure.Position;
@@ -23,6 +24,7 @@ import ntut.csie.sslab.ddd.model.DomainEventBus;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
 
@@ -30,14 +32,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GetBoardContentUseCaseTest {
     public BoardRepository boardRepository;
-    public TextFigureRepository textFigureRepository;
+    public StickyNoteRepositoryImpl stickyNoteRepositoryImpl;
     public DomainEventBus domainEventBus;
     public NotifyBoardAdapter notifyBoardAdapter; //todo: see when commit textFigure to board
-
+    @Autowired
+    private StickyNoteRepositoryPeer stickyNoteRepositoryPeer;
     @BeforeEach
     public void setUp() {
         boardRepository = new BoardRepository();
-        textFigureRepository = new TextFigureRepository();
+        stickyNoteRepositoryImpl = new StickyNoteRepositoryImpl(stickyNoteRepositoryPeer);
         domainEventBus = new GoogleEventBus();
         notifyBoardAdapter = new NotifyBoardAdapter(new NotifyBoard(boardRepository, domainEventBus));
         domainEventBus.register(notifyBoardAdapter); // this include : commit textFigure to board
@@ -45,7 +48,7 @@ public class GetBoardContentUseCaseTest {
 
     @Test
     public void test_get_board_content_with_empty_board() {
-        GetBoardContentUseCase getBoardContentUseCase = new GetBoardContentUseCase(boardRepository,  textFigureRepository,  domainEventBus); //todo: add this?
+        GetBoardContentUseCase getBoardContentUseCase = new GetBoardContentUseCase(boardRepository, stickyNoteRepositoryImpl,  domainEventBus); //todo: add this?
         GetBoardContentInput input = getBoardContentUseCase.newInput();
         GetBoardContentPresenter output = new GetBoardContentPresenter();
 
@@ -77,7 +80,7 @@ public class GetBoardContentUseCaseTest {
 
     @Test
     public void test_get_board_content_with_stickyNote_board() {
-        GetBoardContentUseCase getBoardContentUseCase = new GetBoardContentUseCase(boardRepository,  textFigureRepository,  domainEventBus); //todo: add this?
+        GetBoardContentUseCase getBoardContentUseCase = new GetBoardContentUseCase(boardRepository, stickyNoteRepositoryImpl,  domainEventBus); //todo: add this?
         GetBoardContentInput input = getBoardContentUseCase.newInput();
         GetBoardContentPresenter output = new GetBoardContentPresenter();
 
@@ -92,7 +95,7 @@ public class GetBoardContentUseCaseTest {
         createBoardUseCase.execute(createBoardInput, createBoardOutput);
 
         // create a stickyNote
-        CreateStickyNoteUseCase createStickyNoteUseCase = new CreateStickyNoteUseCase(textFigureRepository, domainEventBus);
+        CreateStickyNoteUseCase createStickyNoteUseCase = new CreateStickyNoteUseCase(stickyNoteRepositoryImpl, domainEventBus);
         CreateStickyNoteInput createStickyNoteInput = createStickyNoteUseCase.newInput();
         CqrsCommandPresenter createStickyNoteOutput = CqrsCommandPresenter.newInstance();
         UUID boardId = UUID.fromString(createBoardOutput.getId()); // this is same boardId!

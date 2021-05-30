@@ -14,4 +14,11 @@ public class StickyNote extends TextFigure {
 
         addDomainEvent(new StickyNoteCreatedDomainEvent(boardId, getTextFigureId()));
     }
+
+    public StickyNote(UUID boardId, UUID stickyNoteId, Position position, String content, Style style) {
+        super(boardId, position, content, style);
+
+        addDomainEvent(new StickyNoteCreatedDomainEvent(boardId, getTextFigureId()));
+    }
+
 }

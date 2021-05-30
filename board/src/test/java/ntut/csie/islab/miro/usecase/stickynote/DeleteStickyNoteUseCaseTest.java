@@ -2,8 +2,8 @@ package ntut.csie.islab.miro.usecase.stickynote;
 
 import ntut.csie.islab.miro.adapter.gateway.eventbus.google.NotifyBoardAdapter;
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository;
-import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
-import ntut.csie.islab.miro.entity.model.board.Board;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.StickyNoteRepositoryImpl;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.stickynote.StickyNoteRepositoryPeer;
 import ntut.csie.islab.miro.entity.model.textFigure.Position;
 import ntut.csie.islab.miro.entity.model.textFigure.ShapeKindEnum;
 import ntut.csie.islab.miro.entity.model.textFigure.Style;
@@ -19,20 +19,23 @@ import ntut.csie.sslab.ddd.adapter.presenter.cqrs.CqrsCommandPresenter;
 import ntut.csie.sslab.ddd.model.DomainEventBus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DeleteStickyNoteUseCaseTest {
-    private TextFigureRepository textFigureRepository;
+    private StickyNoteRepositoryImpl stickyNoteRepositoryImpl;
     private BoardRepository boardRepository;
     private DomainEventBus domainEventBus;
     public NotifyBoardAdapter notifyBoardAdapter; //todo: see when commit textFigure to board
+    @Autowired
+    private StickyNoteRepositoryPeer stickyNoteRepositoryPeer;
 
     @BeforeEach
     public void setUp(){
-        textFigureRepository = new TextFigureRepository();
+        stickyNoteRepositoryImpl = new StickyNoteRepositoryImpl(stickyNoteRepositoryPeer);
         boardRepository = new BoardRepository();
         domainEventBus = new GoogleEventBus();
         notifyBoardAdapter = new NotifyBoardAdapter(new NotifyBoard(boardRepository, domainEventBus));
@@ -52,7 +55,7 @@ public class DeleteStickyNoteUseCaseTest {
         createBoardUseCase.execute(createBoardInput, createBoardOutput);
 
         // create a stickyNote
-        CreateStickyNoteUseCase createStickyNoteUseCase = new CreateStickyNoteUseCase(textFigureRepository, domainEventBus);
+        CreateStickyNoteUseCase createStickyNoteUseCase = new CreateStickyNoteUseCase(stickyNoteRepositoryImpl, domainEventBus);
         CreateStickyNoteInput createStickyNoteInput = createStickyNoteUseCase.newInput();
         CqrsCommandPresenter createStickyNoteOutput = CqrsCommandPresenter.newInstance();
         UUID boardId = UUID.fromString(createBoardOutput.getId());
@@ -65,17 +68,17 @@ public class DeleteStickyNoteUseCaseTest {
         createStickyNoteInput.setStyle(style);
         createStickyNoteUseCase.execute(createStickyNoteInput, createStickyNoteOutput);
 
-        assertNotNull(textFigureRepository.findById(boardId, UUID.fromString(createStickyNoteOutput.getId())));
+        assertNotNull(stickyNoteRepositoryImpl.findById(UUID.fromString(createStickyNoteOutput.getId())));
 
         // delete a stickyNote in board
-        DeleteStickyNoteUseCase deleteStickyNoteUseCase = new DeleteStickyNoteUseCase(textFigureRepository, domainEventBus);
+        DeleteStickyNoteUseCase deleteStickyNoteUseCase = new DeleteStickyNoteUseCase(stickyNoteRepositoryImpl, domainEventBus);
         DeleteStickyNoteInput input = deleteStickyNoteUseCase.newInput();
         CqrsCommandPresenter output = CqrsCommandPresenter.newInstance();
         input.setBoardId(boardId);
         input.setTextFigureId(UUID.fromString(createStickyNoteOutput.getId()));
         deleteStickyNoteUseCase.execute(input, output);
 
-        assertNull(textFigureRepository.findById(boardId, UUID.fromString(createStickyNoteOutput.getId())).orElse(null));
+        assertNull(stickyNoteRepositoryImpl.findById(UUID.fromString(createStickyNoteOutput.getId())).orElse(null));
 
 
 

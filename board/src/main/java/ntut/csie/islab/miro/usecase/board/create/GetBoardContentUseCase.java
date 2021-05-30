@@ -1,7 +1,7 @@
 package ntut.csie.islab.miro.usecase.board.create;
 
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository;
-import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.StickyNoteRepositoryImpl;
 import ntut.csie.islab.miro.adapter.presenter.GetBoardContentPresenter;
 import ntut.csie.islab.miro.entity.model.board.Board;
 import ntut.csie.islab.miro.entity.model.board.CommittedTextFigure;
@@ -17,12 +17,12 @@ import java.util.List;
 
 public class GetBoardContentUseCase {
     private BoardRepository boardRepository;
-    private TextFigureRepository textFigureRepository;
+    private StickyNoteRepositoryImpl stickyNoteRepositoryImpl;
     private DomainEventBus domainEventBus;
 
-    public GetBoardContentUseCase(BoardRepository boardRepository, TextFigureRepository textFigureRepository, DomainEventBus domainEventBus) {
+    public GetBoardContentUseCase(BoardRepository boardRepository, StickyNoteRepositoryImpl stickyNoteRepositoryImpl, DomainEventBus domainEventBus) {
         this.boardRepository = boardRepository;
-        this.textFigureRepository = textFigureRepository;
+        this.stickyNoteRepositoryImpl = stickyNoteRepositoryImpl;
         this.domainEventBus = domainEventBus;
     }
 
@@ -42,7 +42,7 @@ public class GetBoardContentUseCase {
         List<CommittedTextFigure> committedTextFigures = board.getCommittedTextFigures();
 
         for (CommittedTextFigure committedTextFigure : committedTextFigures) {
-            TextFigure textFigure = this.textFigureRepository.findById(board.getId(), committedTextFigure.getTextFigureId()).get();
+            TextFigure textFigure = this.stickyNoteRepositoryImpl.findById(committedTextFigure.getTextFigureId()).get();
             textFigures.add(textFigure);
         }
         // textFigure to textFigureDto

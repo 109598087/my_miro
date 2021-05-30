@@ -20,6 +20,14 @@ public abstract class TextFigure extends AggregateRoot<UUID> {
         this.style = style;
     }
 
+    public TextFigure(UUID boardId, UUID stickyNoteId, Position position, String content, Style style) {
+        super(stickyNoteId);
+        this.boardId = boardId;
+        this.position = position;
+        this.content = content;
+        this.style = style;
+    }
+
     public UUID getBoardId() {
         return boardId;
     }
@@ -52,9 +60,10 @@ public abstract class TextFigure extends AggregateRoot<UUID> {
         this.style = style;
     }
 
-    public  UUID getTextFigureId(){
+    public UUID getTextFigureId() {
         return this.getId();
     }
+
 
 
 }

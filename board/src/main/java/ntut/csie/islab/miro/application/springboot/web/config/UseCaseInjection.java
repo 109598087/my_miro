@@ -1,7 +1,7 @@
 package ntut.csie.islab.miro.application.springboot.web.config;
 
 import ntut.csie.islab.miro.adapter.gateway.repository.springboot.board.BoardRepository;
-import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.TextFigureRepository;
+import ntut.csie.islab.miro.adapter.gateway.repository.springboot.textfigure.StickyNoteRepositoryImpl;
 import ntut.csie.islab.miro.usecase.board.create.CreateBoardUseCase;
 import ntut.csie.islab.miro.usecase.board.create.GetBoardContentUseCase;
 import ntut.csie.islab.miro.usecase.eventHandler.NotifyBoard;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration("EzMiroUserCaseInjection")
 public class UseCaseInjection {
     private BoardRepository boardRepository;
-    private TextFigureRepository textFigureRepository;
+    private StickyNoteRepositoryImpl stickyNoteRepositoryImpl;
     private DomainEventBus eventBus;
 
 
@@ -31,12 +31,12 @@ public class UseCaseInjection {
 
     @Bean(name = "createStickyNoteUseCase")
     public CreateStickyNoteUseCase createStickyNoteUseCase() {
-        return new CreateStickyNoteUseCase(textFigureRepository, eventBus);
+        return new CreateStickyNoteUseCase(stickyNoteRepositoryImpl, eventBus);
     }
 
     @Bean(name = "getBoardContentUseCase")
     public GetBoardContentUseCase getBoardContentUseCase() {
-        return new GetBoardContentUseCase(boardRepository, textFigureRepository, eventBus);
+        return new GetBoardContentUseCase(boardRepository, stickyNoteRepositoryImpl, eventBus);
     }
 
     @Autowired
@@ -45,8 +45,8 @@ public class UseCaseInjection {
     }
 
     @Autowired
-    public void setFigureRepository(TextFigureRepository textFigureRepository) {
-        this.textFigureRepository = textFigureRepository;
+    public void setFigureRepository(StickyNoteRepositoryImpl stickyNoteRepositoryImpl) {
+        this.stickyNoteRepositoryImpl = stickyNoteRepositoryImpl;
     }
 
     @Autowired
